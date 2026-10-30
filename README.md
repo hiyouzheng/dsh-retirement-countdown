@@ -64,8 +64,11 @@ dsh plugin --profile desktop remove dsh-retirement-countdown
 
 - 作者/版权：**Ghost Zhou**（`package.json` 的 `author`、`LICENSE` 的版权行）。
 - **已发布**：npm [dsh-retirement-countdown@0.1.0](https://www.npmjs.com/package/dsh-retirement-countdown)（`latest=0.1.0`，9 个文件 / 15.3 KB，公开 tarball 已下载解包核对）；代码在 [hiyouzheng/dsh-retirement-countdown](https://github.com/hiyouzheng/dsh-retirement-countdown)。
-- 社区市场（1024Store / dshfind）是**按公开 GitHub 仓库 + npm 包爬取**的目录，不是投稿表单；实测结论、踩过的坑、可直接提交的条目都在 [market/submission.md](market/submission.md)、[market/1024store-entry.json](market/1024store-entry.json)、[market/dshfind-item.json](market/dshfind-item.json)。
-- **收录状态**：发布后 10 分钟内两家目录里都还搜不到（1024Store `?q=retirement` 无结果；dshfind 首页 50 条没有）。爬取周期未知，等收录即可；等不及就提 issue/PR。
+- **自建索引源**（format 1，已用 DSH 官方校验器验过）：<https://hiyouzheng.github.io/dsh-retirement-countdown/index.json>
+  - 在 DSH「插件市场」里加这个 URL 就能分发；`marketInstallTarget` 解析出的安装参数是 `dsh-retirement-countdown@0.1.0`。
+- **1024Store**：目录条目 PR [imsai-sh/awesome-deepseek-harness-plugins#760](https://github.com/imsai-sh/awesome-deepseek-harness-plugins/pull/760) 已通过 static-review 并**自动合并**，等站点同步。
+- **dshfind**：它的收录规则是「公开仓库打上 `dsh-plugin` topic，每天全量同步」，本仓库已加上该 topic（另有 `dsh`、`dsh-bundle`、`countdown`、`widget`），无需投稿。
+- **本机 Profile 现状**：已从 link 安装切成 npm 安装（`dsh-retirement-countdown@0.1.0`），所以之后改工作区代码不会再影响正在运行的插件，要改就得发新版本。
 
 ## 验收状态
 

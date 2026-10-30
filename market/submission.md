@@ -34,7 +34,18 @@
 - 第一次那枚 token 的权限是 **Read and write (stage only)**，注册表只多出 `0.0.0-stage` 占位版本（描述 `Temporary package placeholder for staged publishing`，tarball 里只有 `package.json` + `README.md` 两个文件）。npm 是异步处理的，几分钟后 0.1.0 才真正出现；期间重发会报 `You cannot publish over the previously published versions: 0.1.0`。占位版本已 `npm deprecate` 标记废弃。
 - 本机 npm 10.9.4 **没有** `npm stage` 命令，无法手动把暂存版本转正——只能等它异步完成，或换带 `publish` 权限的 token。
 
-**目录收录现状**（发布后 10 分钟内实测）：**两家都还没爬到**。1024Store `?q=retirement` 无结果，dshfind 首页 50 条里没有。dshfind 目录共 18,700 条、按仓库维度组织，爬取周期未知；等不及就用第 4 节的条目去提 issue/PR。
+**实际做了什么（2026-10-30）**
+
+| 渠道 | 动作 | 结果 |
+|---|---|---|
+| 1024Store | 按它们的 `CONTRIBUTING.md` 提了一个只加 `catalog/plugins/hiyouzheng--dsh-retirement-countdown.json` 的 PR：[#760](https://github.com/imsai-sh/awesome-deepseek-harness-plugins/pull/760) | `static-review` 通过 → **自动合并**；站点由 `catalog-sync` 工作流推到 `POST /api/v1/catalog/sync`，稍后出现在 deepseek1024.com |
+| dshfind | 它的规则是「公开仓库打 `dsh-plugin` topic，每天全量同步」 | 本仓库 topic 已设为 `dsh-plugin, dsh, dsh-bundle, countdown, widget`，等日更 |
+| 自建索引 | `docs/index.json`（format 1）随仓库推到 GitHub Pages | <https://hiyouzheng.github.io/dsh-retirement-countdown/index.json> 已 200，且通过 DSH `parseMarketIndex` 校验 |
+
+两个关键规则（从它们的 CONTRIBUTING / README 里读到的，不是猜的）：
+
+- **1024Store**：只认 `catalog/plugins/<owner>--<repo>.json` 一个文件；`id` 形如 `owner/repo`（monorepo 用 `owner/repo/sub/dir`），`repository` 固定仓库根，`category` 必须取自 `catalog/categories.json`，`added` 是提交日期；**PR 不许碰 `catalog/plugins/` 之外的任何文件**，否则静态门禁直接拒绝。只有「新增一条」的非 draft PR 才会自动合并，改动既有条目要人工 review。
+- **dshfind**：没有投稿入口，`README.zh-CN.md` 写明「给公开仓库加上 `dsh-plugin` topic，下次数据刷新时出现」。所以别去提 issue。
 
 ### 网络诊断（2026-10-30 更正）
 

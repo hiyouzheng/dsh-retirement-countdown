@@ -1,9 +1,9 @@
 {
-  "_comment": "dshfind 目录条目（字段取自 2026-10-30 实测的 /market/v1/plugins 结构 items[]）。owner 已按实际仓库 hiyouzheng/dsh-retirement-countdown 回填；latestVersion/updatedAt 以实际发布为准。",
+  "_comment": "dshfind 不需要投稿文件：它的收录规则是给公开 GitHub 仓库打上 `dsh-plugin` topic，每天全量同步（见 hikariming/dshfind 的 README.zh-CN.md）。这里保留一份它目录项的字段结构，仅作对照/自查用，不是提交物。",
   "id": "hiyouzheng/dsh-retirement-countdown",
   "name": "dsh-retirement-countdown",
   "displayName": "Retirement Countdown",
-  "summary": "Retirement countdown in the DSH composer: always-visible days/hours/minutes/seconds, click the pencil to set the target date; stored locally, no config or restart.",
+  "summary": "Retirement countdown above the DSH composer: always-visible days, hours, minutes and seconds; click the pencil to pick the target date, stored locally in the browser.",
   "repository": {
     "url": "https://github.com/hiyouzheng/dsh-retirement-countdown"
   },
@@ -18,5 +18,5 @@
     "ui"
   ],
   "latestVersion": "0.1.0",
-  "updatedAt": "2026-10-30T00:00:00Z"
+  "updatedAt": "2026-10-30T05:46:00Z"
 }

@@ -1,14 +1,12 @@
 {
-  "_comment": "1024Store 目录条目（字段取自 2026-10-30 实测的 /api/v2/plugins 结构）。owner/url 已按实际仓库 hiyouzheng/dsh-retirement-countdown 回填；installCount/stars 等统计列由服务端爬取，不要提交。",
+  "$schema": "../schema/plugin.schema.json",
   "id": "hiyouzheng/dsh-retirement-countdown",
   "name": "dsh-retirement-countdown",
-  "owner": "hiyouzheng",
-  "url": "https://github.com/hiyouzheng/dsh-retirement-countdown",
-  "repository": "dsh-retirement-countdown",
-  "category": "fun",
+  "repository": "https://github.com/hiyouzheng/dsh-retirement-countdown",
+  "category": "ui",
   "description": {
-    "en": "Retirement countdown in the DSH composer: always-visible days/hours/minutes/seconds, click the pencil to set the target date; stored locally, no config or restart.",
-    "zh": "DSH 输入框上方的退休倒计时：常驻显示天/时/分/秒，点铅笔改目标日期，本地保存，不改配置也不用重启。"
+    "en": "Retirement countdown above the DSH composer: always-visible days, hours, minutes and seconds; click the pencil to pick the target date, stored locally in the browser.",
+    "zh": "在 DSH 输入框上方常驻的退休倒计时：显示天/时/分/秒，点铅笔改目标日期，日期存在浏览器本地。"
   },
-  "install": "dsh plugin --profile web add dsh-retirement-countdown"
+  "added": "2026-10-30"
 }
