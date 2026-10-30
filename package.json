@@ -1,0 +1,63 @@
+{
+  "name": "dsh-retirement-countdown",
+  "version": "0.1.0",
+  "description": "Retirement countdown widget in the DSH composer: shows days/hours/minutes/seconds and lets you pick the target date. 退休倒计时小组件。",
+  "keywords": [
+    "dsh",
+    "dsh-plugin",
+    "deepseek-harness",
+    "countdown",
+    "retirement",
+    "widget"
+  ],
+  "type": "module",
+  "main": "index.js",
+  "exports": {
+    ".": "./index.js",
+    "./client": "./client.js",
+    "./package.json": "./package.json",
+    "./icon": "./icon.svg",
+    "./locale/*.json": "./locale/*.json"
+  },
+  "icon": "./icon.svg",
+  "files": [
+    "index.js",
+    "client.js",
+    "cordis.patch.yml",
+    "icon.svg",
+    "locale/*.json",
+    "README.md"
+  ],
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web",
+      "immediately": true,
+      "inject": [
+        "@deepseek-ai/dsh-client-ui-conversation"
+      ]
+    }
+  },
+  "engines": {
+    "node": "^22.19.0 || >=24.0.0",
+    "dsh": ">=0.2.1-rc.2"
+  },
+  "scripts": {
+    "check": "node --check index.js && node --check client.js"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "author": "Ghost Zhou",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hiyouzheng/dsh-retirement-countdown.git"
+  },
+  "homepage": "https://github.com/hiyouzheng/dsh-retirement-countdown#readme",
+  "bugs": {
+    "url": "https://github.com/hiyouzheng/dsh-retirement-countdown/issues"
+  },
+  "license": "MIT"
+}

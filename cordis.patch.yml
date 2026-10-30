@@ -1,0 +1,5 @@
+# dsh-retirement-countdown —— bundle patch
+# 插入一行插件；渲染全部在 client.js（浏览器侧）。
+- insert:
+    - id: retirement-countdown
+      name: dsh-retirement-countdown

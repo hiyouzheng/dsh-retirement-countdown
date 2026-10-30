@@ -1,0 +1,22 @@
+{
+  "_comment": "dshfind 目录条目。字段取自 2026-10-30 实测的 /market/v1/plugins 返回结构（items[]）。把 <gh-owner> 换成你的 GitHub 用户名；latestVersion/updatedAt 以实际发布为准。",
+  "id": "<gh-owner>/dsh-retirement-countdown",
+  "name": "dsh-retirement-countdown",
+  "displayName": "Retirement Countdown",
+  "summary": "Retirement countdown in the DSH composer: always-visible days/hours/minutes/seconds, click the pencil to set the target date; stored locally, no config or restart.",
+  "repository": {
+    "url": "https://github.com/<gh-owner>/dsh-retirement-countdown"
+  },
+  "package": {
+    "registry": "npm",
+    "name": "dsh-retirement-countdown"
+  },
+  "publisher": {
+    "name": "Ghost Zhou"
+  },
+  "categories": [
+    "ui"
+  ],
+  "latestVersion": "0.1.0",
+  "updatedAt": "2026-10-30T00:00:00Z"
+}

@@ -1,0 +1,14 @@
+{
+  "_comment": "1024Store (DSH 1024Store) 目录条目。字段取自 2026-10-30 实测的 /api/v2/plugins 返回结构；installCount/stars 等统计列由服务端爬取，不要提交。把 <gh-owner> 换成你的 GitHub 用户名，其余字段保持原样提交。",
+  "id": "<gh-owner>/dsh-retirement-countdown",
+  "name": "dsh-retirement-countdown",
+  "owner": "<gh-owner>",
+  "url": "https://github.com/<gh-owner>/dsh-retirement-countdown",
+  "repository": "dsh-retirement-countdown",
+  "category": "fun",
+  "description": {
+    "en": "Retirement countdown in the DSH composer: always-visible days/hours/minutes/seconds, click the pencil to set the target date; stored locally, no config or restart.",
+    "zh": "DSH 输入框上方的退休倒计时：常驻显示天/时/分/秒，点铅笔改目标日期，本地保存，不改配置也不用重启。"
+  },
+  "install": "dsh plugin --profile web add dsh-retirement-countdown"
+}

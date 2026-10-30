@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "Retirement Countdown",
+    "description": "Keeps a retirement countdown above the composer; click it to set the target date (stored locally)."
+  }
+}
