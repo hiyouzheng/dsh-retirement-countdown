@@ -1,9 +1,9 @@
-{
-  "_comment": "1024Store (DSH 1024Store) 目录条目。字段取自 2026-10-30 实测的 /api/v2/plugins 返回结构；installCount/stars 等统计列由服务端爬取，不要提交。把 <gh-owner> 换成你的 GitHub 用户名，其余字段保持原样提交。",
-  "id": "<gh-owner>/dsh-retirement-countdown",
+﻿{
+  "_comment": "1024Store (DSH 1024Store) 目录条目。字段取自 2026-10-30 实测的 /api/v2/plugins 返回结构；installCount/stars 等统计列由服务端爬取，不要提交。把 hiyouzheng 换成你的 GitHub 用户名，其余字段保持原样提交。",
+  "id": "hiyouzheng/dsh-retirement-countdown",
   "name": "dsh-retirement-countdown",
-  "owner": "<gh-owner>",
-  "url": "https://github.com/<gh-owner>/dsh-retirement-countdown",
+  "owner": "hiyouzheng",
+  "url": "https://github.com/hiyouzheng/dsh-retirement-countdown",
   "repository": "dsh-retirement-countdown",
   "category": "fun",
   "description": {
