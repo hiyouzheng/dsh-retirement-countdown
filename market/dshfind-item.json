@@ -1,5 +1,5 @@
-﻿{
-  "_comment": "dshfind 目录条目。字段取自 2026-10-30 实测的 /market/v1/plugins 返回结构（items[]）。把 hiyouzheng 换成你的 GitHub 用户名；latestVersion/updatedAt 以实际发布为准。",
+{
+  "_comment": "dshfind 目录条目（字段取自 2026-10-30 实测的 /market/v1/plugins 结构 items[]）。owner 已按实际仓库 hiyouzheng/dsh-retirement-countdown 回填；latestVersion/updatedAt 以实际发布为准。",
   "id": "hiyouzheng/dsh-retirement-countdown",
   "name": "dsh-retirement-countdown",
   "displayName": "Retirement Countdown",
