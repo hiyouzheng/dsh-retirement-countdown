@@ -1,0 +1,77 @@
+{
+  "format": 1,
+  "title": {
+    "en": "Ghost Zhou — DSH plugins",
+    "zh": "Ghost Zhou 的 DSH 插件"
+  },
+  "description": {
+    "en": "DeepSeek Harness plugins published by Ghost Zhou.",
+    "zh": "Ghost Zhou 发布的 DeepSeek Harness 插件。"
+  },
+  "metadata": {
+    "categories": {
+      "widget": {
+        "title": {
+          "en": "Widgets",
+          "zh": "小组件"
+        }
+      }
+    },
+    "labels": {
+      "ui": {
+        "title": {
+          "en": "UI",
+          "zh": "界面"
+        }
+      },
+      "countdown": {
+        "title": {
+          "en": "Countdown",
+          "zh": "倒计时"
+        }
+      }
+    }
+  },
+  "plugins": [
+    {
+      "name": "dsh-retirement-countdown",
+      "title": {
+        "en": "Retirement Countdown",
+        "zh": "退休倒计时"
+      },
+      "description": {
+        "en": "Keeps a retirement countdown above the composer; click it to set the target date (stored locally).",
+        "zh": "在输入框下方常驻一个退休倒计时；点击可改目标日期（只存在本机浏览器）。"
+      },
+      "icon": "https://unpkg.com/dsh-retirement-countdown@0.1.0/icon.svg",
+      "author": "Ghost Zhou",
+      "metadata": {
+        "category": "widget",
+        "labels": [
+          "ui",
+          "countdown"
+        ],
+        "keywords": [
+          "dsh",
+          "dsh-plugin",
+          "deepseek-harness",
+          "countdown",
+          "retirement",
+          "widget"
+        ]
+      },
+      "versions": [
+        {
+          "version": "0.1.0",
+          "publishTimestamp": 1793338991,
+          "source": {
+            "type": "npm"
+          },
+          "engines": {
+            "dsh": ">=0.2.1-rc.2"
+          }
+        }
+      ]
+    }
+  ]
+}

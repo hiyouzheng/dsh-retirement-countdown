@@ -21,11 +21,16 @@ const marketIndexEntry = pathToFileURL(path.join(appDir, 'node_modules', '@deeps
 const { parseMarketIndex } = await import(marketIndexEntry)
 
 const args = new Map()
-for (let index = 2; index < process.argv.length; index += 2) {
+for (let index = 2; index < process.argv.length; index++) {
   const key = process.argv[index]
   if (!key.startsWith('--')) continue
   const next = process.argv[index + 1]
-  args.set(key.slice(2), next !== undefined && !next.startsWith('--') ? next : 'true')
+  if (next !== undefined && !next.startsWith('--')) {
+    args.set(key.slice(2), next)
+    index++
+  } else {
+    args.set(key.slice(2), 'true')
+  }
 }
 
 const manifest = JSON.parse(await readFile(path.join(root, 'package.json'), 'utf8'))
@@ -43,8 +48,8 @@ const author = args.get('author')
 
 const index = {
   format: 1,
-  title: { en: 'My DSH plugins', zh: '我的 DSH 插件' },
-  description: { en: 'Plugins published by this workspace.', zh: '本工作区发布的插件。' },
+  title: { en: 'Ghost Zhou — DSH plugins', zh: 'Ghost Zhou 的 DSH 插件' },
+  description: { en: 'DeepSeek Harness plugins published by Ghost Zhou.', zh: 'Ghost Zhou 发布的 DeepSeek Harness 插件。' },
   metadata: {
     categories: {
       widget: { title: { en: 'Widgets', zh: '小组件' } },
@@ -83,8 +88,8 @@ const parsed = parseMarketIndex(index, baseUrl)
 assert.equal(parsed.plugins.length, 1)
 assert.equal(parsed.plugins[0].versions[0].version, version)
 
-await mkdir(path.join(root, 'dist'), { recursive: true })
-const target = path.join(root, 'dist', 'index.json')
+const target = path.resolve(root, args.get('out') ?? path.join('dist', 'index.json'))
+await mkdir(path.dirname(target), { recursive: true })
 await writeFile(target, `${JSON.stringify(index, null, 2)}\n`, 'utf8')
 console.log(`✓ index validated by dsh-plugin-market-index, written to ${target}`)
 console.log(JSON.stringify(parsed.plugins[0], null, 2))
