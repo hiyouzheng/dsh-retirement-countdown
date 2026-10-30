@@ -12,7 +12,16 @@
 
 ## 安装
 
+已发布到 npm：[dsh-retirement-countdown@0.1.0](https://www.npmjs.com/package/dsh-retirement-countdown)
+
 ```powershell
+# 任何人（装到自己的 Profile 里）
+dsh plugin --profile desktop add dsh-retirement-countdown
+
+# 仓库地址直装
+dsh plugin --profile desktop add github:hiyouzheng/dsh-retirement-countdown
+
+# 本地开发（当前开发机就是这么装的，link 到工作区，改代码立即是新的文件）
 dsh plugin --profile desktop add link:D:\AITools\sdh\dsh-retirement-countdown
 ```
 
@@ -54,10 +63,9 @@ dsh plugin --profile desktop remove dsh-retirement-countdown
 ## 发布与收录（社区市场）
 
 - 作者/版权：**Ghost Zhou**（`package.json` 的 `author`、`LICENSE` 的版权行）。
-- 包已可发布：无 `private`、`publishConfig.access=public`、`engines.dsh >=0.2.1-rc.2`、`keywords` 含 `dsh-plugin`。
-- 社区市场（1024Store / dshfind）是**按公开 GitHub 仓库 + npm 包爬取**的目录，不是投稿表单；两家实测结论、卡点、以及按它们真实字段结构写好的条目都在 [market/submission.md](market/submission.md)、[market/1024store-entry.json](market/1024store-entry.json)、[market/dshfind-item.json](market/dshfind-item.json)。
-- 还差两步（缺的是**凭据**，不是网络）：`npm publish`（本机无 npm 凭据）、建公开 GitHub 仓库（本机 SSH key 未被 GitHub 接受、也没有 `gh` CLI/token）。GitHub 网络实测是通的：`curl` 要加 `--ssl-no-revoke`（Windows 证书吊销检查离线），`git` 与 `node fetch` 都正常。
-- 本地 git 仓库已建好并完成首个提交（分支 `main`），只差 `git push`。
+- **已发布**：npm [dsh-retirement-countdown@0.1.0](https://www.npmjs.com/package/dsh-retirement-countdown)（`latest=0.1.0`，9 个文件 / 15.3 KB，公开 tarball 已下载解包核对）；代码在 [hiyouzheng/dsh-retirement-countdown](https://github.com/hiyouzheng/dsh-retirement-countdown)。
+- 社区市场（1024Store / dshfind）是**按公开 GitHub 仓库 + npm 包爬取**的目录，不是投稿表单；实测结论、踩过的坑、可直接提交的条目都在 [market/submission.md](market/submission.md)、[market/1024store-entry.json](market/1024store-entry.json)、[market/dshfind-item.json](market/dshfind-item.json)。
+- **收录状态**：发布后 10 分钟内两家目录里都还搜不到（1024Store `?q=retirement` 无结果；dshfind 首页 50 条没有）。爬取周期未知，等收录即可；等不及就提 issue/PR。
 
 ## 验收状态
 
@@ -67,4 +75,5 @@ dsh plugin --profile desktop remove dsh-retirement-countdown
   - `apply` 注入并注册到 `conversation.composer.dock`，注册 id 为 `retirement-countdown`；
   - 钉住 `Date.now()` 后渲染出「100 天 + hh:mm:ss + ✎ 按钮」，已退休分支与 `en-US` 文案也都对。
 - 已装进 `desktop` Profile；`dsh --profile desktop --dump-config` 里能看到 `- id: retirement-countdown`（组合成功，patch 没写错）。
+- **发布产物已核对**：从 `registry.npmjs.org` 下载 `0.1.0` 的 tarball，9 个文件齐全、两个 JS 都能过 `node --check`、`dsh.bundle.patch` 与 `dsh.client` 字段都在。
 - **未验证**：浏览器里的实际观感（位置、间距、明暗主题对比度）。刷新页面后目视一下；要调大小/位置/文案告诉我。

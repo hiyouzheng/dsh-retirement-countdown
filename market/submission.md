@@ -25,9 +25,16 @@
 | 1 | npm 包名可用 | ✅ `dsh-retirement-countdown` 在 npm 上 404，未被占用 |
 | 2 | 包声明 `dsh.bundle.patch` | ✅ 有，且 `dsh.client` 声明了 Web UI 半边 |
 | 3 | `keywords` 含 `dsh-plugin` | ✅ 有（爬虫按关键字/仓库识别常用这个） |
-| 4 | 发布到 npm | ⛔ **没做**：本机没有 npm 凭据（`npm whoami` → ENEEDAUTH） |
-| 5 | 公开 GitHub 仓库 | ⛔ **没做**：仓库还没建（缺你的账号授权），但**网络已确认可用**，见下面的诊断 |
-| 6 | `package.json` 的 `repository` / `homepage` | ⛔ 等第 5 步：仓库 URL 未知，暂不写死 |
+| 4 | 发布到 npm | ✅ **已发**：[dsh-retirement-countdown@0.1.0](https://www.npmjs.com/package/dsh-retirement-countdown)，`latest=0.1.0`，9 个文件 / 15.3 KB，已从公开 tarball 下载解包核对 |
+| 5 | 公开 GitHub 仓库 | ✅ **已建并推送**：[hiyouzheng/dsh-retirement-countdown](https://github.com/hiyouzheng/dsh-retirement-countdown)（public，main） |
+| 6 | `package.json` 的 `repository` / `homepage` | ✅ 已回填并随 0.1.0 发布（`npm view` 里可见） |
+
+**发布踩的两个坑**（免得重踩）：
+
+- 第一次那枚 token 的权限是 **Read and write (stage only)**，注册表只多出 `0.0.0-stage` 占位版本（描述 `Temporary package placeholder for staged publishing`，tarball 里只有 `package.json` + `README.md` 两个文件）。npm 是异步处理的，几分钟后 0.1.0 才真正出现；期间重发会报 `You cannot publish over the previously published versions: 0.1.0`。占位版本已 `npm deprecate` 标记废弃。
+- 本机 npm 10.9.4 **没有** `npm stage` 命令，无法手动把暂存版本转正——只能等它异步完成，或换带 `publish` 权限的 token。
+
+**目录收录现状**（发布后 10 分钟内实测）：**两家都还没爬到**。1024Store `?q=retirement` 无结果，dshfind 首页 50 条里没有。dshfind 目录共 18,700 条、按仓库维度组织，爬取周期未知；等不及就用第 4 节的条目去提 issue/PR。
 
 ### 网络诊断（2026-10-30 更正）
 
@@ -44,26 +51,38 @@
 
 所以：**网络上 GitHub 是通的，卡的是凭据**。本机既没有 `gh` CLI，也没有 `GH_TOKEN`/`GITHUB_TOKEN`，git 也没配 credential helper。HTTP(S) 访问统一加 `--ssl-no-revoke`（或改用 git / node fetch）即可绕过那个证书吊销报错。
 
-第 6 条很关键：两家的 `id` 都从 `owner/repo` 生成，**没有 repository 字段的包基本不会被归到某个仓库下**（dshfind 取样 50 条，50 条都有 repository）。
+第 6 条很关键：两家的 `id` 都从 `owner/repo` 生成，**没有 repository 字段的包基本不会被归到某个仓库下**（dshfind 取样 50 条，50 条都有 repository）。现在这条已经满足。
 
-## 3. 有凭据后的一串命令
+## 3. 实际执行的发布流程（已跑通，可复用）
+
+已在 `hiyouzheng/dsh-retirement-countdown` 上实际执行过的顺序：
 
 ```powershell
-# 1) npm 发布（先在 C:\Users\<you>\.npmrc 写好 token，或用 NPM_TOKEN）
-dsh plugin --profile desktop add dsh-retirement-countdown   # 装自己发的版本，验证一次
+# 0) 准备：npm 账号开 2FA 时，token 必须是 Automation 类型，或 Granular 勾了 Bypass 2FA
+#    写进 C:\Users\<you>\.npmrc（一行、无 BOM、无尾换行）：
+#    //registry.npmjs.org/:_authToken=npm_xxx
+
+# 1) 本地仓库 → 首个提交（作者 Ghost Zhou，邮箱用 GitHub noreply 占位）
+git init -b main
+git add -A
+git -c core.autocrlf=false commit -m "feat: retirement countdown widget for the DSH composer"
+
+# 2) 建远端并推送（GitHub 是通的；curl 访问要 --ssl-no-revoke）
+git remote add origin https://github.com/hiyouzheng/dsh-retirement-countdown.git
+git -c http.version=HTTP/1.1 push -u origin main
+
+# 3) 发布 npm（0.1.0）
 npm publish --access public
 
-# 2) GitHub：本地仓库已经建好并提交过了（.git 存在，分支 main，1 个提交）
-#    你只需在 GitHub 网页上 New repository → 名字 dsh-retirement-countdown（不要勾 README）
-git remote add origin https://github.com/<owner>/dsh-retirement-countdown.git
-git push -u origin main        # 弹窗时用 Personal Access Token 当密码；SSH key 目前没被 GitHub 接受
+# 4) 校验公开产物（别只看本地 tarball）
+npm view dsh-retirement-countdown@0.1.0 --json
+curl.exe -sS -L https://registry.npmjs.org/dsh-retirement-countdown/-/dsh-retirement-countdown-0.1.0.tgz -o pkg.tgz
 
-# 3) 回填仓库地址后重新发布（让 npm 与目录都能识别仓库归属）
-#    package.json 里加：
-#      "repository": { "type": "git", "url": "git+https://github.com/<owner>/dsh-retirement-countdown.git" },
-#      "homepage": "https://github.com/<owner>/dsh-retirement-countdown#readme"
-npm version patch && npm publish
+# 5) 重新生成市场索引
+node scripts/make-index.mjs --version 0.1.0 --timestamp <epoch> --unpkg --author "Ghost Zhou"
 ```
+
+坑与对策：`git push` 偶发 `Couldn't connect to server` → 加 `-c http.version=HTTP/1.1` 重试即可；`curl` 访问 GitHub 要 `--ssl-no-revoke`。
 
 想用 GitHub Pages 托管自己的插件市场索引（`dist/index.json`）的话，注意它现在被 `.gitignore` 忽略了，需要 `git add -f dist/index.json` 或去掉 `.gitignore` 里的 `dist/`。
 
